@@ -1,9 +1,7 @@
         // IDEVBaseServer.aidl
-  package com.cepri.service;
-
-   import com.cepri.service.ApnInfo;
-
-    interface IDEVBaseServer {
+ package com.cepri.service;
+import com.cepri.service.ApnInfo;
+interface IDEVBaseServer {
     boolean setDateTime(String dateTime);
     boolean addApn(in ApnInfo apnInfo);
     boolean deleteApn(String apnName);
