@@ -1,9 +1,11 @@
 package com.cepri.service;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -65,13 +67,37 @@ public class DEVBaseServer {
         }
     }
 
+    public int createApn(ContentValues values) {
+        try {
+            return idevBaseServer.createApn(values);
+        } catch (RemoteException e) {
+            return -1;
+        }
+    }
+
+    public boolean setDefaultApn(int apnId) {
+        try {
+            return idevBaseServer.setDefaultApn(apnId);
+        } catch (RemoteException e) {
+            return false;
+        }
+    }
+
+    public int getApnId(@NonNull String apnName) {
+        try {
+            return idevBaseServer.getApnId(apnName);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 删除APN.
      *
      * @param apnName apn名称
      * @return 是否成功删除
      */
-    public boolean deleteApn(String apnName) {
+    public boolean deleteApn(@NonNull String apnName) {
         try {
             return idevBaseServer.deleteApn(apnName);
         } catch (RemoteException e) {
@@ -103,7 +129,7 @@ public class DEVBaseServer {
      * @param apnName apn名称
      * @return 是否设置成功
      */
-    public boolean setCurrApn(String apnName) {
+    public boolean setCurrApn(@NonNull String apnName) {
         try {
             return idevBaseServer.setCurrApn(apnName);
         } catch (RemoteException e) {

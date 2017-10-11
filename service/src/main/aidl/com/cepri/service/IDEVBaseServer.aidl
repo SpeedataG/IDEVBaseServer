@@ -1,9 +1,14 @@
         // IDEVBaseServer.aidl
  package com.cepri.service;
 import com.cepri.service.ApnInfo;
+import android.content.ContentValues;
 interface IDEVBaseServer {
     boolean setDateTime(String dateTime);
     boolean addApn(in ApnInfo apnInfo);
+    int createApn(in ContentValues values);
+    boolean setDefaultApn(int apnId);
+    int getApnId(String apnName);
+    boolean deleteApnById(int apnId);
     boolean deleteApn(String apnName);
     ApnInfo getCurrApn();
     boolean setCurrApn(String apnName);
@@ -21,4 +26,4 @@ interface IDEVBaseServer {
     boolean setHomeKeyEnabled(boolean status);
     boolean getHomeKeyEnabled();
     boolean setStatusBarPullEnabled(boolean status);
-    }
+   }
