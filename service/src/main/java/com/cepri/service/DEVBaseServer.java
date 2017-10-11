@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -83,11 +82,11 @@ public class DEVBaseServer {
         }
     }
 
-    public int getApnId(@NonNull String apnName) {
+    public int getApnId(String apnName) {
         try {
             return idevBaseServer.getApnId(apnName);
         } catch (RemoteException e) {
-            e.printStackTrace();
+           return -1;
         }
     }
 
@@ -97,7 +96,7 @@ public class DEVBaseServer {
      * @param apnName apn名称
      * @return 是否成功删除
      */
-    public boolean deleteApn(@NonNull String apnName) {
+    public boolean deleteApn(String apnName) {
         try {
             return idevBaseServer.deleteApn(apnName);
         } catch (RemoteException e) {
@@ -129,7 +128,7 @@ public class DEVBaseServer {
      * @param apnName apn名称
      * @return 是否设置成功
      */
-    public boolean setCurrApn(@NonNull String apnName) {
+    public boolean setCurrApn(String apnName) {
         try {
             return idevBaseServer.setCurrApn(apnName);
         } catch (RemoteException e) {

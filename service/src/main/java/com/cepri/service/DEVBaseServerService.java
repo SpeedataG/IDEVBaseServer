@@ -9,8 +9,6 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.provider.Telephony;
-import android.support.annotation.NonNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,12 +50,12 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
     @Override
     public boolean addApn(ApnInfo apnInfo) throws RemoteException {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Telephony.Carriers.NAME, apnInfo.getApnName());
-        contentValues.put(Telephony.Carriers.APN, apnInfo.getApn());
-        contentValues.put(Telephony.Carriers.USER, apnInfo.getUserName());
-        contentValues.put(Telephony.Carriers.PASSWORD, apnInfo.getPassword());
-        contentValues.put(Telephony.Carriers.PROXY, apnInfo.getProxy());
-        contentValues.put(Telephony.Carriers.PORT, apnInfo.getPort());
+        contentValues.put("name", apnInfo.getApnName());
+        contentValues.put("apn", apnInfo.getApn());
+        contentValues.put("user", apnInfo.getUserName());
+        contentValues.put("password", apnInfo.getPassword());
+        contentValues.put("proxy", apnInfo.getProxy());
+        contentValues.put("port", apnInfo.getPort());
         return setDefaultApn(createApn(contentValues));
     }
 
@@ -144,7 +142,7 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
 
     @Override
-    public boolean deleteApn(@NonNull String apnName) throws RemoteException {
+    public boolean deleteApn(String apnName) throws RemoteException {
         return deleteApnById(getApnId(apnName));
     }
 
@@ -163,12 +161,12 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
         String proxy = "";
         String port = "";
         while (mCursor.moveToNext()) {
-            apnName = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.NAME));
-            apn = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.APN));
-            username = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.USER));
-            password = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PASSWORD));
-            proxy = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PROXY));
-            port = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PORT));
+            apnName = mCursor.getString(mCursor.getColumnIndex("name"));
+            apn = mCursor.getString(mCursor.getColumnIndex("apn"));
+            username = mCursor.getString(mCursor.getColumnIndex("user"));
+            password = mCursor.getString(mCursor.getColumnIndex("password"));
+            proxy = mCursor.getString(mCursor.getColumnIndex("proxy"));
+            port = mCursor.getString(mCursor.getColumnIndex("port"));
         }
         mCursor.close();
         apnInfo.setApnName(apnName);
@@ -191,12 +189,12 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
                 null, null, null);
         List<ApnInfo> apnInfoList = new ArrayList<>();
         while (mCursor != null && mCursor.moveToNext()) {
-            String apnName = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.NAME));
-            String apn = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.APN));
-            String username = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.USER));
-            String password = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PASSWORD));
-            String proxy = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PROXY));
-            String port = mCursor.getString(mCursor.getColumnIndex(Telephony.Carriers.PORT));
+            String apnName = mCursor.getString(mCursor.getColumnIndex("name"));
+            String apn = mCursor.getString(mCursor.getColumnIndex("apn"));
+            String username = mCursor.getString(mCursor.getColumnIndex("user"));
+            String password = mCursor.getString(mCursor.getColumnIndex("password"));
+            String proxy = mCursor.getString(mCursor.getColumnIndex("proxy"));
+            String port = mCursor.getString(mCursor.getColumnIndex("port"));
             ApnInfo apnInfo = new ApnInfo();
             apnInfo.setApnName(apnName);
             apnInfo.setApn(apn);
