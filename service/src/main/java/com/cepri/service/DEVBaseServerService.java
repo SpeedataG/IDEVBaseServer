@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.RemoteException;
 import android.os.SystemClock;
 
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import android.os.SystemProperties;
 
 /**
  * @author :Reginer in  2017/10/10 14:13.
@@ -216,17 +218,17 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public String getDeviceModel() throws RemoteException {
-        return null;
+        return Build.MODEL;
     }
 
     @Override
     public String getDeviceSn() throws RemoteException {
-        return null;
+        return SystemProperties.get("ro.serialno");
     }
 
     @Override
     public String getOSVersionCode() throws RemoteException {
-        return null;
+        return Build.DISPLAY;
     }
 
     @Override
