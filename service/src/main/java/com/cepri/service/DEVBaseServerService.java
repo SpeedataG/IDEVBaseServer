@@ -6,17 +6,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.provider.Settings;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import android.os.SystemProperties;
 
 /**
  * @author :Reginer in  2017/10/10 14:13.
@@ -243,11 +245,48 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public boolean setUSBMode(int mode) throws RemoteException {
+        UsbManager mUsbManager = (UsbManager) mContext.getSystemService(Context.USB_SERVICE);
+        if (mode == 0) {
+            //关闭usb功能
+            mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_CHARGING_ONLY, true);
+            return true;
+        }
+        if (mode == 0x0001) {
+            //打开adb调试
+            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED, 1);
+            return true;
+        }
+        if (mode == 0x0010) {
+            //打开mtp方式
+            mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
+            return true;
+        }
+        if (mode == 0x0100) {
+            //可以同时开始adb，mtp和大容量存储模式的一种或者几种通信模式
+            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED, 1);
+            mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
+            return true;
+        }
         return false;
     }
 
     @Override
     public int getUSBMode() throws RemoteException {
+        UsbManager mUsbManager = (UsbManager) mContext.getSystemService(Context.USB_SERVICE);
+        boolean enableAdb = (Settings.Secure.getInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED, 0) > 0);
+        String function = mUsbManager.getDefaultFunction();
+        if (enableAdb && (UsbManager.USB_FUNCTION_MTP.equals(function) ||
+                UsbManager.USB_FUNCTION_PTP.equals(function) ||
+                UsbManager.USB_FUNCTION_MASS_STORAGE.equals(function)
+        )) {
+            return 0x0100;
+        }
+        if (UsbManager.USB_FUNCTION_MTP.equals(function)) {
+            return 0x0010;
+        }
+        if (enableAdb) {
+            return 0x0001;
+        }
         return 0;
     }
 
