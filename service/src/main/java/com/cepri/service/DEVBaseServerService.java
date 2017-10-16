@@ -9,11 +9,15 @@ import android.database.SQLException;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.RecoverySystem;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.app.StatusBarManager;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +38,8 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
     private static final Uri PREFERRED_APN_URI = Uri.parse("content://telephony/carriers/preferapn");
 
     private Context mContext;
+
+    private String filePath;
 
     public DEVBaseServerService(Context context) {
         mContext = context;
@@ -292,17 +298,34 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public boolean OSUpdate(String filePath) throws RemoteException {
-        return false;
+        this.filePath = filePath;
+        try {
+            RecoverySystem.installPackage(mContext, new File(filePath));
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int getOSVerifyPercent() throws RemoteException {
-        return 0;
+        final int[] verifyPercent = new int[1];
+        try {
+            RecoverySystem.verifyPackage(new File(filePath), new RecoverySystem.ProgressListener() {
+                @Override
+                public void onProgress(int progress) {
+                    verifyPercent[0] = progress;
+                }
+            }, null);
+        } catch (Exception e) {
+            return 0;
+        }
+        return verifyPercent[0];
     }
 
     @Override
     public String getServiceVersionCode() throws RemoteException {
-        return null;
+        return "1.0";
     }
 
     @Override
@@ -317,7 +340,10 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public boolean setStatusBarPullEnabled(boolean status) throws RemoteException {
-        return false;
+        StatusBarManager  mStatusBarManager = (StatusBarManager) mContext.getSystemService(Context.STATUS_BAR_SERVICE);
+        //禁止下拉mStatusBarManager点disable(StatusBarManager.DISABLE_NONE);
+        mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND);
+        return true;
     }
 
 }
