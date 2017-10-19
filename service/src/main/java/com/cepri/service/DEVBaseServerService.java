@@ -41,6 +41,8 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     private String filePath;
 
+    private static final String ENABLE_HOME = "widget_enable_home";
+
     public DEVBaseServerService(Context context) {
         mContext = context;
     }
@@ -330,17 +332,18 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public boolean setHomeKeyEnabled(boolean status) throws RemoteException {
-        return false;
+        SystemProperties.set(ENABLE_HOME, String.valueOf(status));
+        return true;
     }
 
     @Override
     public boolean getHomeKeyEnabled() throws RemoteException {
-        return false;
+        return "true".equals(SystemProperties.get(ENABLE_HOME));
     }
 
     @Override
     public boolean setStatusBarPullEnabled(boolean status) throws RemoteException {
-        StatusBarManager  mStatusBarManager = (StatusBarManager) mContext.getSystemService(Context.STATUS_BAR_SERVICE);
+        StatusBarManager mStatusBarManager = (StatusBarManager) mContext.getSystemService(Context.STATUS_BAR_SERVICE);
         //禁止下拉mStatusBarManager点disable(StatusBarManager.DISABLE_NONE);
         mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND);
         return true;
