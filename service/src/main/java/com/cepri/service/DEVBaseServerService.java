@@ -243,12 +243,12 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
 
     @Override
     public String getDeviceHardVersionCode() throws RemoteException {
-        return null;
+        return SystemProperties.get("persist.sys.hardware");;
     }
 
     @Override
     public String getProductionDate() throws RemoteException {
-        return null;
+        return SystemProperties.get("persist.sys.time");;
     }
 
     @Override
