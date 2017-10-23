@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">IDEVBaseServer</string>
+    <string name="set_time">设置系统时间</string>
+    <string name="add_apn">添加APN并设置为当前</string>
+    <string name="delete_apn">删除APN</string>
+    <string name="get_current_apn">获取当前APN的设置信息</string>
+    <string name="set_default_apn">设置已有apn为当前的APN</string>
+    <string name="get_all_apn">获取所有APN的信息</string>
+    <string name="get_device_model">获取设备型号</string>
+    <string name="get_device_sn">获取设备序列号</string>
+    <string name="get_version_name">获取设备系统版本号</string>
+    <string name="hardware_name">获取设备硬件版本号</string>
+    <string name="get_production_date">获取设备生产日期</string>
+    <string name="set_usb_mode">设置USB的传输方式</string>
+    <string name="get_usb_mode">获取当前USB的传输方式</string>
+    <string name="os_update">系统升级（可能会重启设备）</string>
+    <string name="os_verify_percent">获取系统校验百分比</string>
+    <string name="service_version_name">获取系统基础服务的版本号</string>
+    <string name="set_home_enable">设置Home键是否可用</string>
+    <string name="get_home_enable">获取Home键的可用状态</string>
+    <string name="set_status_bar_enable">设置状态栏是否可以下拉</string>
 </resources>

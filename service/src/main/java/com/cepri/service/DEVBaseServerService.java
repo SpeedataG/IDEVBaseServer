@@ -1,5 +1,6 @@
 package com.cepri.service;
 
+import android.app.StatusBarManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -14,7 +15,6 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.app.StatusBarManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -257,6 +257,7 @@ public class DEVBaseServerService extends IDEVBaseServer.Stub {
         if (mode == 0) {
             //关闭usb功能
             mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_CHARGING_ONLY, true);
+            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED, 0);
             return true;
         }
         if (mode == 0x0001) {
