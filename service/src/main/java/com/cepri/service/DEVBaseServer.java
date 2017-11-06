@@ -90,6 +90,14 @@ public class DEVBaseServer {
         }
     }
 
+    public boolean deleteApnById(int apnId)  {
+        try {
+            return idevBaseServer.deleteApnById(apnId);
+        } catch (RemoteException e) {
+            return false;
+        }
+    }
+
     /**
      * 删除APN.
      *

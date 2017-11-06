@@ -16,7 +16,7 @@ import com.cepri.service.DEVBaseServer;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DEVBaseServer mService;
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = "Reginer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
