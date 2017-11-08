@@ -19,4 +19,13 @@
     <string name="set_home_enable">设置Home键是否可用</string>
     <string name="get_home_enable">获取Home键的可用状态</string>
     <string name="set_status_bar_enable">设置状态栏是否可以下拉</string>
+    <string name="init">打开端口</string>
+    <string name="de_init">关闭端口</string>
+    <string name="clearSendCache">清除发送缓存</string>
+    <string name="clearRecvCache">清除接收缓存</string>
+    <string name="config">设置通讯参数</string>
+    <string name="send">发送数据</string>
+    <string name="recData">接收数据</string>
+    <string name="setTimeOut">设置发送和接收数据的超时时间</string>
+    <string name="start_native">跳转到native功能测试</string>
 </resources>

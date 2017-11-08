@@ -124,6 +124,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/set_status_bar_enable"/>
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_native"/>
 
     </LinearLayout>
 

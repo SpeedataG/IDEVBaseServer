@@ -1,5 +1,6 @@
 package com.cepri.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_set_home_enable).setOnClickListener(this);
         findViewById(R.id.btn_get_home_enable).setOnClickListener(this);
         findViewById(R.id.btn_set_status_bar_enable).setOnClickListener(this);
+        findViewById(R.id.btn_start).setOnClickListener(this);
     }
 
     @Override
@@ -110,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_set_status_bar_enable:
                 Log.d(TAG, String.valueOf(mService.setStatusBarPullEnabled(false)));
+                break;
+            case R.id.btn_start:
+                startActivity(new Intent(this, NativeActivity.class));
                 break;
             default:
                 break;

@@ -7,7 +7,8 @@ package cepri.device.utils;
  */
 public class SecurityUnit {
     static {
-        System.loadLibrary("native-lib");
+//        System.loadLibrary("native-lib");
+        System.loadLibrary("cepri_dev");
     }
 
     /**
