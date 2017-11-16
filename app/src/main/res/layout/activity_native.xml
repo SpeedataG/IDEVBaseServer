@@ -13,39 +13,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/init"/>
+
     <Button
         android:id="@+id/de_init"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/de_init"/>
+
     <Button
         android:id="@+id/clearSendCache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/clearSendCache"/>
+
     <Button
         android:id="@+id/clearRecvCache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/clearRecvCache"/>
+
     <Button
         android:id="@+id/config"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/config"/>
+
     <Button
         android:id="@+id/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/send"/>
+
     <Button
         android:id="@+id/recData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/recData"/>
+
     <Button
         android:id="@+id/setTimeOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setTimeOut"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
